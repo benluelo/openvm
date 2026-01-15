@@ -981,8 +981,14 @@ where
             )));
         }
 
+        println!("solc stderr");
+        println!("{}", String::from_utf8_lossy(&output.stderr));
+
         let parsed: Value =
             serde_json::from_slice(&output.stdout).map_err(|e| SdkError::Other(e.into()))?;
+
+        println!("solc output");
+        println!("{parsed}");
 
         let bytecode = parsed
             .get("contracts")
