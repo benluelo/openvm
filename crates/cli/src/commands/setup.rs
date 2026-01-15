@@ -121,12 +121,6 @@ impl SetupCmd {
                 agg_vk
             };
 
-            println!("Generating root verifier ASM...");
-            let root_verifier_asm = sdk.generate_root_verifier_asm();
-
-            println!("Generating verifier contract...");
-            let verifier = sdk.generate_halo2_verifier_solidity()?;
-
             println!("Writing stark proving key to file...");
             write_object_to_file(&default_agg_stark_pk_path, sdk.agg_pk())?;
 
@@ -135,6 +129,12 @@ impl SetupCmd {
 
             println!("Writing halo2 proving key to file...");
             write_object_to_file(&default_agg_halo2_pk_path, sdk.halo2_pk())?;
+
+            println!("Generating root verifier ASM...");
+            let root_verifier_asm = sdk.generate_root_verifier_asm();
+
+            println!("Generating verifier contract...");
+            let verifier = sdk.generate_halo2_verifier_solidity()?;
 
             println!("Writing root verifier ASM to file...");
             write(&default_asm_path, root_verifier_asm)?;
